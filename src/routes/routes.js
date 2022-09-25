@@ -1,6 +1,7 @@
-const express = require('express'),
-      router = express.Router(),
-      controllers = require('../controllers/controllers');
+import express from 'express';
+import controllers from '../controllers/controllers';
+
+const router = express.Router();
 
 router.get('/', function(req, res) {
     res.send('APP iniciada');

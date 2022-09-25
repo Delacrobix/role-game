@@ -1,9 +1,8 @@
-const express = require('express'),
-      app = express();
+import app from './app';
 
 const PORT = process.env.PORT || 8080;
 
-const server = () => {
+function executeServer(){
     try{
         app.listen(PORT, function(){
             console.log(`Node server running on port ${PORT}`);
@@ -13,4 +12,4 @@ const server = () => {
     }
 }
 
-module.exports = server;
+executeServer();
