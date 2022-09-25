@@ -11,12 +11,12 @@ const UserSchema = new Schema({
         type: String
     },
     password: {
-        type: String,
+        type: String
     },
     heroes: [
         {
             type: Schema.ObjectId,
-            ref: 'hero',
+            ref: 'hero'
         }
     ]
 });
