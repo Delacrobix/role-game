@@ -12,10 +12,13 @@ html(lang="en")
         span.fa-stack.fa-lg
           i.fa.fa-circle.fa-stack-2x
           i.fa.fa-lock.fa-stack-1x
-      input.login-username(type='email' autofocus='true' required='true' placeholder='Email')
+      input.login-username(type='text' autofocus='true' required='true' placeholder='Email or user name')
       input.login-password(type='password' required='true' placeholder='Password')
-      input.login-submit(type='submit' name='Login' value='Login')
-    a.button.google(href='/login/federated/google') Sign in with Google
-    a.login-forgot-pass(href='#') forgot password?
+      button.login-submit Login
+      a.button-register(href='/auth/register') register
+      a.button.google(href='/login/federated/google') Sign in with Google
+    a.login-forgot-pass(href='/auth/forgot-pass') forgot password?
     .underlay-photo
     .underlay-black
+
+    script(type='text/javascript' src="/js/login.js")

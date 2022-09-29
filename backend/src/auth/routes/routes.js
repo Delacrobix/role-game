@@ -12,6 +12,14 @@ router.get('/auth/login', function (req, res) {
   res.render('login', {});
 });
 
+router.get('/auth/register', function (req, res) {
+  res.render('register', {});
+});
+
+router.get('/auth/forgot-pass', function (req, res) {
+  res.render('forgotpassword', {});
+});
+
 router.get('/login/federated/google', passport.authenticate('google'));
 
 /**
