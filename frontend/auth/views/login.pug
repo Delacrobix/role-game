@@ -1,0 +1,25 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/styles/login/login.css')
+    title Welcome
+  body 
+    form.login-form
+      p.login-text
+        span.fa-stack.fa-lg
+          i.fa.fa-circle.fa-stack-2x
+          i.fa.fa-lock.fa-stack-1x
+      input.login-username(type='text' autofocus='true' required='true' placeholder='Email or user name')
+      input.login-password(type='password' required='true' placeholder='Password')
+      button.login-submit Login
+      .links-container
+        a.button-register(href='/auth/register') register
+        a.button-google(href='/login/federated/google') sign in with Google
+    a.login-forgot-pass(href='/auth/forgot-pass') forgot password?
+    .underlay-photo
+    .underlay-black
+
+    script(type='text/javascript' src='/js/login.js')
