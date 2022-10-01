@@ -3,6 +3,7 @@ import body_parser from 'body-parser';
 import method_override from 'method-override';
 import morgan from 'morgan';
 import auth_routes from './auth/routes/routes';
+import passport from 'passport';
 import env_config from 'dotenv';
 import path from 'path';
 
@@ -13,6 +14,7 @@ const app = express();
 
 app.use(body_parser.urlencoded({extended: false}));
 app.use(body_parser.json());
+app.use(passport.initialize());
 app.use(method_override());
 
 const statics = __dirname;
@@ -28,3 +30,14 @@ app.use(morgan('dev'));
 app.use(auth_routes);  
 
 export default app;
+
+/* 
+  TODO:
+    ? Implementar inicio de sesion con google y steam
+    
+    ? Impedir que un usuario se registre sin cumplir las condiciones de seguridad necesarias en la contraseña
+
+    ?
+    ?
+    ?
+*/

@@ -25,7 +25,9 @@ router.get('/login/federated/google', passport.authenticate('google'));
 /**
  * *Rutas dedicadas al login.
  */
-router.route("/addUser").post(controllers.addUser);
-router.route("/getUser/:userId").get(controllers.findUserById);
+router.route('/auth/login/verify').post(controllers.findUserAndPassword);
+router.route('/auth/register/save-user').post(controllers.addUser);
+// router.route("/addUser").post(controllers.addUser);
+// router.route("/getUser/:userId").get(controllers.findUserById);
 
 export default router;

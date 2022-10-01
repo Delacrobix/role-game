@@ -1,4 +1,4 @@
-import User from "../models/userSchema";
+import User from '../models/userSchema';
 
 exports.findUserById = function (req, res) {
   let user_id = req.params.userId;
@@ -21,22 +21,28 @@ exports.findUserAndPassword = async function (req, res) {
     user: user,
   });
 
+  if(!us){
+    us = await User.findOne({
+      email: user,
+    });
+  }
+
   if (!us) {
     return res.status(200).jsonp({
-      message: "Usuario no existe.",
+      message: 'Usuario o correo no registrado.',
       flag: true,
     });
   } else {
     let match = await us.comparePassword(password);
-
-    if (match) {
+    
+    if(match) {
       return res.status(200).jsonp({
         user: user,
         id: us._id,
       });
     } else {
       return res.status(200).jsonp({
-        message: "Contraseña incorrecta.",
+        message: 'Contraseña incorrecta.',
         flag: true,
       });
     }
@@ -49,15 +55,25 @@ exports.findUserAndPassword = async function (req, res) {
  * añade el registro a la base de datos.
  */
 exports.addUser = async function (req, res) {
-  let { user, password, email } = req.body;
+  let { user, email, password  } = req.body;
 
   let _email = await User.findOne({
     email: email,
   });
 
+  let _user = await User.findOne({
+    user: user,
+  });
+
   if (_email) {
     return res.status(200).jsonp({
       message: 'El correo ingresado ya esta registrado',
+      flag: true,
+    });
+  } else if (_user) {
+
+    return res.status(200).jsonp({
+      message: 'El usuario ingresado ya esta registrado',
       flag: true,
     });
   } else {
