@@ -8,39 +8,55 @@ submit.addEventListener('click', (e) => {
   postRegister();
 });
 
-
+/*
+  * Lógica que verifica que la contraseña cumpla con tener
+  * - Almenos un numero
+  * - Almenos una letra mayúscula
+*/
 password_input.addEventListener('keyup', (e) => {
   let password = password_input.value;
   let alert_text = document.querySelector('.alert-text');
+  let message = 'The password must be:';
 
   alert_text.style.display = 'block';
+
+  submit.disabled = false;
   
   if(password.length < 8) {
-    alert_text.innerHTML = 'The password must be at least 8 characters';
+    message += '<br>' + '- at least 8 characters'
+    alert_text.innerHTML = message;
+
+    submit.disabled = true;
   } else {
     alert_text.style.display = 'none';
 
     if(!haveNumber(password)){
       alert_text.style.display = 'block';
-      alert_text.innerHTML = 'The password must contain at least digit';
+      message += '<br>' + '- contain at least digit';
+
+      submit.disabled = true;
+      alert_text.innerHTML = message;
     }
     
-    if(!haveUpper(password)){
+    if(!haveCapitalLetter(password)){
       alert_text.style.display = 'block';
-      alert_text.innerHTML = 'The password must contain at least one letter in upper case';
+      message += '<br>' + '- contain at least one capital letter';
+
+      submit.disabled = true;
+      alert_text.innerHTML = message;
     }
   }
 });
 
-function haveUpper(password) {
+function haveCapitalLetter(password) {
   for(let i = 0; i < password.length; i++) {
-    if(isUpper(password.charAt(i))){
+    if((isCapitalLetter(password.charAt(i))) && (isNaN(password.charAt(i)))){
       return true;
     }
   }
 }
 
-function isUpper(char) {
+function isCapitalLetter(char) {
   return (char == char.toUpperCase())
 }
 

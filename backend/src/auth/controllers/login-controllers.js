@@ -5,7 +5,7 @@ exports.findUserById = function (req, res) {
 
   User.findById(user_id).exec(function (err, User) {
     return res.status(200).jsonp({
-      user: User.user,
+      user: User.user
     });
   });
 };
@@ -29,7 +29,7 @@ exports.findUserAndPassword = async function (req, res) {
 
   if (!us) {
     return res.status(200).jsonp({
-      message: 'Usuario o correo no registrado.',
+      message: 'Username or email not found.',
       flag: true,
     });
   } else {
@@ -42,7 +42,7 @@ exports.findUserAndPassword = async function (req, res) {
       });
     } else {
       return res.status(200).jsonp({
-        message: 'Contraseña incorrecta.',
+        message: 'Incorrect password.',
         flag: true,
       });
     }
@@ -57,6 +57,13 @@ exports.findUserAndPassword = async function (req, res) {
 exports.addUser = async function (req, res) {
   let { user, email, password  } = req.body;
 
+  // *Validación de campos vacíos
+  if((user.length == 0) || (email.length == 0) || (password.length == 0)){
+    return res.status(200).jsonp({
+      message: 'Must be fill in all required fields.'
+    });
+  }
+
   let _email = await User.findOne({
     email: email,
   });
@@ -67,14 +74,12 @@ exports.addUser = async function (req, res) {
 
   if (_email) {
     return res.status(200).jsonp({
-      message: 'El correo ingresado ya esta registrado',
-      flag: true,
+      message: 'The email address is already registered.',
     });
   } else if (_user) {
 
     return res.status(200).jsonp({
-      message: 'El usuario ingresado ya esta registrado',
-      flag: true,
+      message: 'The user is already registered.',
     });
   } else {
     let new_user = new User({

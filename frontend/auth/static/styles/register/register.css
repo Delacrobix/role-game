@@ -86,6 +86,7 @@ input:focus :-ms-input-placeholder {
 }
 .login-form .alert-text {
   color: hotpink;
+  font-size: 75%;
 }
 .login-form .links-container {
   display: grid;
